@@ -1,160 +1,260 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Guess the Compliment 💖</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Segoe+UI&display=swap');
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Bhavya's Sweet Quiz 💖</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Segoe+UI&display=swap');
 
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #fff0f5, #ffe6ea);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      overflow: hidden;
-      padding: 10px;
-    }
+  body {
+    margin: 0;
+    background: linear-gradient(135deg, #fff0f5, #6e1414);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #f8e9e9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+  }
 
-    .card {
-      background: linear-gradient(145deg, #800000, #a52a2a);
-      padding: clamp(20px, 5vw, 35px) clamp(15px, 5vw, 25px);
-      border-radius: 25px;
-      text-align: center;
-      box-shadow: 0 0 25px rgba(128, 0, 0, 0.6);
-      max-width: 420px;
-      width: 100%;
-      color: #fff0f5;
-      animation: pulseGlow 3s ease-in-out infinite;
-      user-select: none;
-      box-sizing: border-box;
-    }
+  .quiz-container {
+    background: linear-gradient(145deg, #800000, #a52a2a);
+    border-radius: 30px;
+    box-shadow: 0 0 30px rgba(165, 42, 42, 0.9);
+    max-width: 400px;
+    width: 100%;
+    padding: 30px 40px;
+    text-align: center;
+    user-select: none;
+  }
 
-    @keyframes pulseGlow {
-      0%, 100% {
-        box-shadow: 0 0 25px rgba(128, 0, 0, 0.6);
-      }
-      50% {
-        box-shadow: 0 0 40px rgba(165, 42, 42, 0.9);
-      }
-    }
+  h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 2.8rem;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 10px #520000;
+  }
 
-    h1 {
-      font-family: 'Pacifico', cursive;
-      font-size: clamp(1.8rem, 5vw, 2.8rem);
-      margin-bottom: 8px;
-      text-shadow: 1px 1px 6px #b22222;
-    }
+  .question {
+    font-size: 1.4rem;
+    margin-bottom: 25px;
+    font-weight: 600;
+    color: #ffd7d7;
+    text-shadow: 1px 1px 5px #4b0000;
+    min-height: 60px;
+  }
 
-    p {
-      font-size: clamp(1rem, 3vw, 1.2rem);
-      margin-top: 0;
-      color: #f5d1d1;
-      margin-bottom: 20px;
-      font-weight: 600;
-    }
+  .answers {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
 
-    .btns {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      margin: 20px 0 10px;
-    }
+  button {
+    background: linear-gradient(145deg, #a52a2a, #800000);
+    border: 2px solid #f9d5d5;
+    color: #f9d5d5;
+    border-radius: 22px;
+    font-size: 1.2rem;
+    padding: 12px 28px;
+    cursor: pointer;
+    box-shadow: 0 5px 18px rgba(255, 182, 193, 0.7);
+    font-weight: 700;
+    transition: all 0.3s ease;
+    user-select: none;
+    flex-grow: 1;
+    max-width: 120px;
+  }
 
-    button {
-      background: linear-gradient(145deg, #a52a2a, #800000);
-      border: 2px solid #fff0f5;
-      color: #fff0f5;
-      border-radius: 18px;
-      font-size: clamp(1rem, 3vw, 1.15rem);
-      padding: 14px 24px;
-      margin: 10px 8px;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(255, 182, 193, 0.6);
-      transition: all 0.3s ease;
-      font-weight: 700;
-      width: 70px;
-      user-select: none;
-      flex-grow: 1;
-      max-width: 70px;
-      min-width: 50px;
-    }
+  button:hover {
+    background: #f9d5d5;
+    color: #800000;
+    border-color: #800000;
+    box-shadow: 0 9px 30px rgba(165, 42, 42, 1);
+    transform: scale(1.1);
+  }
 
-    button:hover {
-      background: #fff0f5;
-      color: #a52a2a;
-      border-color: #a52a2a;
-      box-shadow: 0 8px 25px rgba(165, 42, 42, 0.9);
-      transform: scale(1.1);
-    }
-
-    .message {
-      font-size: clamp(1.1rem, 4vw, 1.3rem);
-      color: #fff0f5;
-      min-height: 60px;
-      font-weight: 600;
-      text-shadow: 1px 1px 5px #b22222;
-      margin-top: 15px;
-      animation: fadeInScale 0.5s ease forwards;
-    }
-
-    @keyframes fadeInScale {
-      0% {
-        opacity: 0;
-        transform: scale(0.9);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    @media (max-width: 360px) {
-      button {
-        padding: 12px 16px;
-        max-width: 60px;
-        font-size: 1rem;
-      }
-    }
-  </style>
+  .result {
+    margin-top: 30px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #ffd7d7;
+    text-shadow: 2px 2px 8px #4b0000;
+    min-height: 80px;
+    user-select: none;
+  }
+</style>
 </head>
 <body>
-  <div class="card" role="main" aria-label="Guess the Compliment game for Bhavya">
-    <h1>Hey Bhavya! 🌸</h1>
-    <p>Guess a number between <strong>1–5</strong></p>
-    <div class="btns" role="group" aria-label="Number selection buttons">
-      <button aria-label="Guess 1" onclick="checkGuess(1)">1</button>
-      <button aria-label="Guess 2" onclick="checkGuess(2)">2</button>
-      <button aria-label="Guess 3" onclick="checkGuess(3)">3</button>
-      <button aria-label="Guess 4" onclick="checkGuess(4)">4</button>
-      <button aria-label="Guess 5" onclick="checkGuess(5)">5</button>
-    </div>
-    <div class="message" id="result" aria-live="polite" aria-atomic="true"></div>
+
+<div class="quiz-container" role="main" aria-live="polite" aria-atomic="true">
+  <h1>Hey Bhavya! 💖</h1>
+  <div class="question" id="question">Will you be my friend? 😊</div>
+  <div class="answers" id="answers">
+    <button onclick="answer('yes')">Yes 💕</button>
+    <button onclick="answer('no')">No 😢</button>
   </div>
+  <div class="result" id="result"></div>
+</div>
 
-  <script>
-    const compliments = [
-      "Almost! But you're adorably persistent 💖",
-      "Nope! But Bhavya, you're 100% awesome 😄",
-      "Wrong guess, but you just made the game cuter ✨",
-      "Oops! But your smile’s already a win 🌸",
-      "Try again! You’re cooler than any right answer 😎"
-    ];
-
-    const correctNumber = Math.floor(Math.random() * 5) + 1;
-
-    function checkGuess(guess) {
-      const result = document.getElementById("result");
-      if (guess === correctNumber) {
-        result.textContent = "🎉 You guessed it, Bhavya! You’re a winner! 💕";
-      } else {
-        const msg = compliments[Math.floor(Math.random() * compliments.length)];
-        result.textContent = msg;
+<script>
+  const quizData = [
+    {
+      question: "Will you be my friend? 😊",
+      answers: ["Yes 💕", "No 😢"],
+      responses: {
+        yes: "Yay! You just made my day brighter! 🌟",
+        no: "Oh no! But I’ll still cherish your smile. 😊"
+      },
+      nudgeQuestions: [
+        {
+          question: "Are you sure? I promise I'm fun! 😄",
+          answers: ["Okay, yes! 💖", "Still no 😞"],
+          responses: {
+            yes: "You made the right choice! 😍",
+            no: "You're hard to convince, but I like a challenge! 😅"
+          }
+        },
+        {
+          question: "What if I bake you cookies? 🍪",
+          answers: ["I'm tempted! 😋", "Cookies don't help 😢"],
+          responses: {
+            yes: "Cookies and friendship it is! 🎉",
+            no: "I'll just keep trying to win you over! 💕"
+          }
+        }
+      ]
+    },
+    {
+      question: "Do you like sweet surprises? 🎁",
+      answers: ["Yes, love them!", "Sometimes"],
+      responses: {
+        yes: "Me too! I have a little surprise for you already 💖",
+        no: "No worries, your smile is the best surprise! 😊"
+      }
+    },
+    {
+      question: "Would you like to hear a secret? 🤫",
+      answers: ["Yes, tell me!", "Maybe later"],
+      responses: {
+        yes: "You’re amazing, Bhavya. That’s my secret! 😍",
+        no: "That’s okay! I’ll keep it safe for now. 🤐"
+      }
+    },
+    {
+      question: "Can I count on you as my special friend? 💫",
+      answers: ["Always!", "I hope so!"],
+      responses: {
+        yes: "That means the world to me! 💖",
+        no: "I’ll keep trying to win your heart! 💕"
       }
     }
-  </script>
+  ];
+
+  let currentIndex = 0;
+  let nudgeIndex = 0;
+  let inNudge = false;
+
+  const questionEl = document.getElementById("question");
+  const answersEl = document.getElementById("answers");
+  const resultEl = document.getElementById("result");
+
+  function showQuestion(data) {
+    questionEl.textContent = data.question;
+    answersEl.innerHTML = "";
+    data.answers.forEach((text, i) => {
+      const btn = document.createElement("button");
+      btn.textContent = text;
+      btn.onclick = () => answer(i === 0 ? "yes" : "no");
+      answersEl.appendChild(btn);
+    });
+  }
+
+  function answer(choice) {
+    let current = quizData[currentIndex];
+
+    if (!inNudge) {
+      // Main question
+      resultEl.textContent = current.responses[choice];
+      if (choice === "no" && current.nudgeQuestions) {
+        // start nudging
+        inNudge = true;
+        nudgeIndex = 0;
+        setTimeout(() => {
+          showQuestion(current.nudgeQuestions[nudgeIndex]);
+          resultEl.textContent = "";
+        }, 2500);
+      } else {
+        currentIndex++;
+        if (currentIndex < quizData.length) {
+          setTimeout(() => {
+            showQuestion(quizData[currentIndex]);
+            resultEl.textContent = "";
+          }, 2500);
+        } else {
+          setTimeout(() => {
+            questionEl.textContent = "Thank you for playing, Bhavya! 💖";
+            answersEl.innerHTML = "";
+            resultEl.textContent = "Looking forward to more fun moments with you! 😊";
+          }, 2500);
+        }
+      }
+    } else {
+      // Nudging questions
+      let nudges = quizData[currentIndex].nudgeQuestions;
+      let currentNudge = nudges[nudgeIndex];
+      resultEl.textContent = currentNudge.responses[choice];
+
+      if (choice === "yes") {
+        // If she finally agrees, move to next main question
+        inNudge = false;
+        currentIndex++;
+        if (currentIndex < quizData.length) {
+          setTimeout(() => {
+            showQuestion(quizData[currentIndex]);
+            resultEl.textContent = "";
+          }, 2500);
+        } else {
+          setTimeout(() => {
+            questionEl.textContent = "Thank you for playing, Bhavya! 💖";
+            answersEl.innerHTML = "";
+            resultEl.textContent = "Looking forward to more fun moments with you! 😊";
+          }, 2500);
+        }
+      } else {
+        // if no again and nudges remain, next nudge question
+        nudgeIndex++;
+        if (nudgeIndex < nudges.length) {
+          setTimeout(() => {
+            showQuestion(nudges[nudgeIndex]);
+            resultEl.textContent = "";
+          }, 2500);
+        } else {
+          // No more nudges, move on gracefully
+          inNudge = false;
+          currentIndex++;
+          if (currentIndex < quizData.length) {
+            setTimeout(() => {
+              showQuestion(quizData[currentIndex]);
+              resultEl.textContent = "";
+            }, 2500);
+          } else {
+            setTimeout(() => {
+              questionEl.textContent = "Thank you for playing, Bhavya! 💖";
+              answersEl.innerHTML = "";
+              resultEl.textContent = "Looking forward to more fun moments with you! 😊";
+            }, 2500);
+          }
+        }
+      }
+    }
+  }
+
+  // Start first question
+  showQuestion(quizData[0]);
+</script>
+
 </body>
 </html>
