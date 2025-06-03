@@ -1,103 +1,185 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Bhavya's Sweet Quiz 💖</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Segoe+UI&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bhavya's Modern Romantic Quiz</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet" />
+  
+  <style>
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #400000, #800020);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      overflow: hidden;
+      padding: 20px;
+    }
+    /* Container with glass effect */
+    .quiz-container {
+      background: rgba(255 255 255 / 0.08);
+      backdrop-filter: blur(18px);
+      border-radius: 24px;
+      max-width: 400px;
+      width: 100%;
+      padding: 40px 30px;
+      box-shadow: 0 0 40px rgba(255 0 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      min-height: 320px;
+      user-select: none;
+    }
+    /* Heading */
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3rem;
+      margin-bottom: 18px;
+      color: #ffe3e3;
+      text-shadow: 0 0 15px #ff7171;
+    }
+    /* Question text */
+    .question {
+      font-weight: 600;
+      font-size: 1.4rem;
+      color: #ffdede;
+      margin-bottom: 30px;
+      text-align: center;
+      min-height: 72px;
+      opacity: 1;
+      transition: opacity 0.4s ease;
+    }
+    .question.fade-out {
+      opacity: 0;
+    }
+    /* Buttons container */
+    .answers {
+      display: flex;
+      gap: 18px;
+      width: 100%;
+      justify-content: center;
+    }
+    /* Buttons style */
+    button {
+      flex: 1;
+      background: linear-gradient(135deg, #800000, #b03030);
+      border: none;
+      border-radius: 9999px;
+      color: #fff;
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 14px 0;
+      cursor: pointer;
+      box-shadow:
+        0 4px 8px rgb(255 50 50 / 0.5),
+        inset 0 -3px 8px rgb(255 100 100 / 0.6);
+      transition: all 0.3s ease;
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+    }
+    button:hover {
+      background: linear-gradient(135deg, #b03030, #ff5555);
+      box-shadow:
+        0 6px 20px rgb(255 100 100 / 0.8),
+        inset 0 -5px 10px rgb(255 150 150 / 0.8);
+      transform: scale(1.05);
+      color: #fff;
+    }
+    button:active {
+      transform: scale(0.98);
+    }
+    /* Result text */
+    .result {
+      margin-top: 28px;
+      min-height: 56px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #ffcccc;
+      text-align: center;
+      filter: drop-shadow(0 0 5px #ff5a5a);
+      transition: opacity 0.3s ease;
+      opacity: 1;
+    }
+    .result.hide {
+      opacity: 0;
+    }
+    /* Confetti effect container */
+    .confetti-container {
+      pointer-events: none;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 120px;
+      height: 120px;
+      overflow: visible;
+      z-index: 20;
+    }
+    /* Confetti pieces */
+    .confetti-piece {
+      position: absolute;
+      width: 8px;
+      height: 14px;
+      background-color: #ffb3b3;
+      opacity: 0;
+      border-radius: 3px;
+      animation-name: confetti-fall;
+      animation-duration: 1200ms;
+      animation-timing-function: ease-out;
+      animation-fill-mode: forwards;
+    }
+    @keyframes confetti-fall {
+      0% {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(100px) rotate(360deg);
+      }
+    }
 
-  body {
-    margin: 0;
-    background: linear-gradient(135deg, #fff0f5, #6e1414);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #f8e9e9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    padding: 20px;
-  }
-
-  .quiz-container {
-    background: linear-gradient(145deg, #800000, #a52a2a);
-    border-radius: 30px;
-    box-shadow: 0 0 30px rgba(165, 42, 42, 0.9);
-    max-width: 400px;
-    width: 100%;
-    padding: 30px 40px;
-    text-align: center;
-    user-select: none;
-  }
-
-  h1 {
-    font-family: 'Pacifico', cursive;
-    font-size: 2.8rem;
-    margin-bottom: 15px;
-    text-shadow: 2px 2px 10px #520000;
-  }
-
-  .question {
-    font-size: 1.4rem;
-    margin-bottom: 25px;
-    font-weight: 600;
-    color: #ffd7d7;
-    text-shadow: 1px 1px 5px #4b0000;
-    min-height: 60px;
-  }
-
-  .answers {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-  }
-
-  button {
-    background: linear-gradient(145deg, #a52a2a, #800000);
-    border: 2px solid #f9d5d5;
-    color: #f9d5d5;
-    border-radius: 22px;
-    font-size: 1.2rem;
-    padding: 12px 28px;
-    cursor: pointer;
-    box-shadow: 0 5px 18px rgba(255, 182, 193, 0.7);
-    font-weight: 700;
-    transition: all 0.3s ease;
-    user-select: none;
-    flex-grow: 1;
-    max-width: 120px;
-  }
-
-  button:hover {
-    background: #f9d5d5;
-    color: #800000;
-    border-color: #800000;
-    box-shadow: 0 9px 30px rgba(165, 42, 42, 1);
-    transform: scale(1.1);
-  }
-
-  .result {
-    margin-top: 30px;
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: #ffd7d7;
-    text-shadow: 2px 2px 8px #4b0000;
-    min-height: 80px;
-    user-select: none;
-  }
-</style>
+    /* Responsive adjustments */
+    @media (max-width: 440px) {
+      .quiz-container {
+        padding: 32px 24px;
+      }
+      h1 {
+        font-size: 2.2rem;
+      }
+      .question {
+        font-size: 1.2rem;
+        min-height: 64px;
+      }
+      button {
+        font-size: 1rem;
+        padding: 12px 0;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<div class="quiz-container" role="main" aria-live="polite" aria-atomic="true">
-  <h1>Hey Bhavya! 💖</h1>
-  <div class="question" id="question">Will you be my friend? 😊</div>
-  <div class="answers" id="answers">
-    <button onclick="answer('yes')">Yes 💕</button>
-    <button onclick="answer('no')">No 😢</button>
-  </div>
-  <div class="result" id="result"></div>
-</div>
+  <main class="quiz-container" role="main" aria-live="polite" aria-atomic="true">
+    <h1>Hey Bhavya! 💖</h1>
+    <div class="question" id="question">Will you be my friend? 😊</div>
+    <div class="answers" id="answers">
+      <button id="btnYes">Yes 💕</button>
+      <button id="btnNo">No 😢</button>
+    </div>
+    <div class="result" id="result"></div>
+    <div class="confetti-container" id="confetti"></div>
+  </main>
 
 <script>
   const quizData = [
@@ -160,43 +242,81 @@
   const questionEl = document.getElementById("question");
   const answersEl = document.getElementById("answers");
   const resultEl = document.getElementById("result");
+  const confettiContainer = document.getElementById("confetti");
+  const btnYes = document.getElementById("btnYes");
+  const btnNo = document.getElementById("btnNo");
 
-  function showQuestion(data) {
-    questionEl.textContent = data.question;
-    answersEl.innerHTML = "";
-    data.answers.forEach((text, i) => {
-      const btn = document.createElement("button");
+  // Utility: fade out text before changing question
+  function fadeOutIn(element, newText) {
+    element.classList.add('fade-out');
+    return new Promise(resolve => {
+      setTimeout(() => {
+        element.textContent = newText;
+        element.classList.remove('fade-out');
+        resolve();
+      }, 400);
+    });
+  }
+
+  // Show question and answers dynamically
+  async function showQuestion(data) {
+    await fadeOutIn(questionEl, data.question);
+
+    answersEl.innerHTML = '';
+    data.answers.forEach((text, idx) => {
+      const btn = document.createElement('button');
       btn.textContent = text;
-      btn.onclick = () => answer(i === 0 ? "yes" : "no");
+      btn.onclick = () => answer(idx === 0 ? 'yes' : 'no');
       answersEl.appendChild(btn);
     });
   }
 
-  function answer(choice) {
+  // Confetti animation on "yes" answers
+  function confettiBurst() {
+    confettiContainer.innerHTML = '';
+    for (let i = 0; i < 15; i++) {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti-piece');
+      confetti.style.left = `${Math.random() * 100}%`;
+      confetti.style.animationDelay = `${Math.random() * 800}ms`;
+      confetti.style.backgroundColor = `hsl(${Math.random() * 20}, 100%, 75%)`;
+      confettiContainer.appendChild(confetti);
+    }
+    setTimeout(() => (confettiContainer.innerHTML = ''), 1500);
+  }
+
+  async function answer(choice) {
     let current = quizData[currentIndex];
 
+    resultEl.style.opacity = 0;
+    await new Promise(r => setTimeout(r, 250));
+
+    resultEl.textContent = current.responses[choice];
+    resultEl.style.opacity = 1;
+
+    if (choice === 'yes') {
+      confettiBurst();
+    }
+
     if (!inNudge) {
-      // Main question
-      resultEl.textContent = current.responses[choice];
       if (choice === "no" && current.nudgeQuestions) {
-        // start nudging
         inNudge = true;
         nudgeIndex = 0;
         setTimeout(() => {
           showQuestion(current.nudgeQuestions[nudgeIndex]);
-          resultEl.textContent = "";
+          resultEl.textContent = '';
         }, 2500);
       } else {
         currentIndex++;
         if (currentIndex < quizData.length) {
           setTimeout(() => {
             showQuestion(quizData[currentIndex]);
-            resultEl.textContent = "";
+            resultEl.textContent = '';
           }, 2500);
         } else {
           setTimeout(() => {
             questionEl.textContent = "Thank you for playing, Bhavya! 💖";
-            answersEl.innerHTML = "";
+            answersEl.innerHTML = '';
             resultEl.textContent = "Looking forward to more fun moments with you! 😊";
           }, 2500);
         }
@@ -205,45 +325,41 @@
       // Nudging questions
       let nudges = quizData[currentIndex].nudgeQuestions;
       let currentNudge = nudges[nudgeIndex];
-      resultEl.textContent = currentNudge.responses[choice];
 
       if (choice === "yes") {
-        // If she finally agrees, move to next main question
         inNudge = false;
         currentIndex++;
         if (currentIndex < quizData.length) {
           setTimeout(() => {
             showQuestion(quizData[currentIndex]);
-            resultEl.textContent = "";
+            resultEl.textContent = '';
           }, 2500);
         } else {
           setTimeout(() => {
             questionEl.textContent = "Thank you for playing, Bhavya! 💖";
-            answersEl.innerHTML = "";
+            answersEl.innerHTML = '';
             resultEl.textContent = "Looking forward to more fun moments with you! 😊";
           }, 2500);
         }
       } else {
-        // if no again and nudges remain, next nudge question
         nudgeIndex++;
         if (nudgeIndex < nudges.length) {
           setTimeout(() => {
             showQuestion(nudges[nudgeIndex]);
-            resultEl.textContent = "";
+            resultEl.textContent = '';
           }, 2500);
         } else {
-          // No more nudges, move on gracefully
           inNudge = false;
           currentIndex++;
           if (currentIndex < quizData.length) {
             setTimeout(() => {
               showQuestion(quizData[currentIndex]);
-              resultEl.textContent = "";
+              resultEl.textContent = '';
             }, 2500);
           } else {
             setTimeout(() => {
               questionEl.textContent = "Thank you for playing, Bhavya! 💖";
-              answersEl.innerHTML = "";
+              answersEl.innerHTML = '';
               resultEl.textContent = "Looking forward to more fun moments with you! 😊";
             }, 2500);
           }
@@ -252,7 +368,7 @@
     }
   }
 
-  // Start first question
+  // Initialize quiz
   showQuestion(quizData[0]);
 </script>
 
